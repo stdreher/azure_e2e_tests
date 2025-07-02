@@ -48,9 +48,24 @@ test('Check started link and subpage', async ({ page }) => {
   // Ensure the page has loaded by checking for the presence of a specific element.
   await expect(page.getByText('Das sind wir von ORBIT')).toContainText('Das sind wir von ORBIT');
 
-  // Ensure the page has loaded by checking for the presence of a specific element.
-  //const image = page.locator('img[src="https://www.orbit.de/wp-content/uploads/resized/2023/09/ORBIT-Team-in-Raum-100x75-c-center.jpg"]');
-  //await expect(image).toBeVisible();
-  await expect(page.getByAltText('Team im Meetingraum beim Unternehmen ORBIT')).toBeVisible();
+  // Log the alt text of the image1
+  const image = page.getByAltText('Team im Meetingraum beim Unternehmen ORBIT');
+  await expect(image).toBeVisible();
+  
+
+  // Log the alt text of the image2.
+  const image2 = page.getByAltText('Event auf der Rooftopbar beim Unternehmen ORBIT in Bonn');
+  await expect(image).toBeVisible();
+
+  // Log the href attribute of image2.
+  const href_image2 = await image2.getAttribute('src');
+  console.log(`Image2 href: ${href_image2}`);
+
+  // Contact link in the main content area should be visible
+  const kontaktLink = page.getByRole('link', { name: 'Kontakt', exact: true }).first();
+  await expect(kontaktLink).toBeVisible();
+
+  // Click the visible Kontakt link
+  await kontaktLink.click();
 
 });
