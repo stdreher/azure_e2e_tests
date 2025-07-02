@@ -49,6 +49,8 @@ test('Check started link and subpage', async ({ page }) => {
   await expect(page.getByText('Das sind wir von ORBIT')).toContainText('Das sind wir von ORBIT');
 
   // Ensure the page has loaded by checking for the presence of a specific element.
-  await expect(page.getByRole('img', { name: 'Team im Meetingraum beim' }).isVisible());
+  //const image = page.locator('img[src="https://www.orbit.de/wp-content/uploads/resized/2023/09/ORBIT-Team-in-Raum-100x75-c-center.jpg"]');
+  //await expect(image).toBeVisible();
+  await expect(page.getByAltText('Team im Meetingraum beim Unternehmen ORBIT')).toBeVisible();
 
 });
